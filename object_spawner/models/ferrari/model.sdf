@@ -1,0 +1,616 @@
+<?xml version="1.0" ?>
+<sdf version='1.7'>
+  <model name='steering_robot'>
+    <link name='map'>
+      <inertial>
+        <pose>0 0.05241 0.011928 0 -0 0</pose>
+        <mass>830</mass>
+        <inertia>
+          <ixx>687.053</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>149.021</iyy>
+          <iyz>-13.8361</iyz>
+          <izz>783.643</izz>
+        </inertia>
+      </inertial>
+      <collision name='map_fixed_joint_lump__ferrari_chassis_collision'>
+        <pose>0 0 0.7 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>1.357 3 0.5</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='map_fixed_joint_lump__ferrari_chassis_collision_1'>
+        <pose>0 0 1.2 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>1.357 1.5 0.5</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='map_fixed_joint_lump__rear_axle_collision_3'>
+        <pose>0 1.45 0.33 0 1.5708 0</pose>
+        <geometry>
+          <cylinder>
+            <length>1.6</length>
+            <radius>0.075</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='map_fixed_joint_lump__ferrari_chassis_visual'>
+        <pose>0 0 0.7 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>1.357 3 0.5</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='map_fixed_joint_lump__ferrari_chassis_visual_1'>
+        <pose>0 0 1.2 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>1.357 1 0.5</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='map_fixed_joint_lump__ferrari_chassis_visual_2'>
+        <pose>0 0 0.7 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>1.557 2 0.5</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='map_fixed_joint_lump__ferrari_chassis_visual_3'>
+        <pose>0 0 0.7 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>1.757 1.5 0.5</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='map_fixed_joint_lump__ferrari_chassis_visual_4'>
+        <pose>0.5 1.4 1.05 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.3</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='map_fixed_joint_lump__ferrari_chassis_visual_5'>
+        <pose>-0.5 1.4 1.05 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.3</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='map_fixed_joint_lump__ferrari_chassis_visual_6'>
+        <pose>0 1.4 1.25 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>1.357 0.2 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='map_fixed_joint_lump__ferrari_chassis_visual_7'>
+        <pose>0 -1 1.05 0.6 -0 0</pose>
+        <geometry>
+          <box>
+            <size>1.357 1.357 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='map_fixed_joint_lump__ferrari_chassis_visual_8'>
+        <pose>0 0.75 1.05 -0.8 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.357 0.8785 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      
+
+      <visual name='map_fixed_joint_lump__rear_axle_visual_11'>
+        <pose>0 1.45 0.33 0 1.5708 0</pose>
+        <geometry>
+          <cylinder>
+            <length>1.6</length>
+            <radius>0.075</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      <velocity_decay/>
+      <velocity_decay/>
+      
+      <gravity>1</gravity>
+      <velocity_decay/>
+    </link>
+    <joint name='front_left_steering_joint' type='fixed'>
+      <pose relative_to='map'>0.8 -1.4 0.33 0 -0 0</pose>
+      <parent>map</parent>
+      <child>front_left_steering</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.6</lower>
+          <upper>0.6</upper>
+          <effort>10000</effort>
+          <velocity>1000</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+        </ode>
+      </physics>
+    </joint>
+    <link name='front_left_steering'>
+      <pose relative_to='front_left_steering_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>50</mass>
+        <inertia>
+          <ixx>0.416667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0833333</iyy>
+          <iyz>0</iyz>
+          <izz>0.416667</izz>
+        </inertia>
+      </inertial>
+      <collision name='front_left_steering_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.3 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='front_left_steering_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.3 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='front_right_steering_wheel_joint' type='fixed'>
+      <pose relative_to='front_left_steering'>0.3 0 0 0 -0 0</pose>
+      <parent>front_left_steering</parent>
+      <child>front_right_steering_wheel</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+        </ode>
+      </physics>
+    </joint>
+    <link name='front_right_steering_wheel'>
+      <pose relative_to='front_right_steering_wheel_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>30</mass>
+        <inertia>
+          <ixx>0.91675</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.91675</iyy>
+          <iyz>0</iyz>
+          <izz>1.6335</izz>
+        </inertia>
+      </inertial>
+      <collision name='front_right_steering_wheel_collision'>
+        <pose>0 0 0 0 1.5708 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.2</length>
+            <radius>0.33</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='front_right_steering_wheel_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.01 0.01 0.01</scale>
+            <uri>model://autopark/urdf/meshes/wheel.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay/>
+    </link>
+    <joint name='front_right_steering_joint' type='fixed'>
+      <pose relative_to='map'>-0.8 -1.4 0.33 0 -0 0</pose>
+      <parent>map</parent>
+      <child>front_right_steering</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.6</lower>
+          <upper>0.6</upper>
+          <effort>10000</effort>
+          <velocity>1000</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+        </ode>
+      </physics>
+    </joint>
+    <link name='front_right_steering'>
+      <pose relative_to='front_right_steering_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>50</mass>
+        <inertia>
+          <ixx>0.416667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0833333</iyy>
+          <iyz>0</iyz>
+          <izz>0.416667</izz>
+        </inertia>
+      </inertial>
+      <collision name='front_right_steering_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.3 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='front_right_steering_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.3 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='front_left_steering_wheel_joint' type='fixed'>
+      <pose relative_to='front_right_steering'>-0.3 0 0 0 -0 0</pose>
+      <parent>front_right_steering</parent>
+      <child>front_left_steering_wheel</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+        </ode>
+      </physics>
+    </joint>
+    <link name='front_left_steering_wheel'>
+      <pose relative_to='front_left_steering_wheel_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>30</mass>
+        <inertia>
+          <ixx>0.91675</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.91675</iyy>
+          <iyz>0</iyz>
+          <izz>1.6335</izz>
+        </inertia>
+      </inertial>
+      <collision name='front_left_steering_wheel_collision'>
+        <pose>0 0 0 0 1.5708 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.2</length>
+            <radius>0.33</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='front_left_steering_wheel_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.01 0.01 0.01</scale>
+            <uri>model://autopark/urdf/meshes/wheel.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay/>
+    </link>
+    <joint name='rear_left_wheel_joint' type='fixed'>
+      <pose relative_to='map'>0.8 1.45 0.33 0 -0 0</pose>
+      <parent>map</parent>
+      <child>rear_left_wheel</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+        </ode>
+      </physics>
+    </joint>
+    <link name='rear_left_wheel'>
+      <pose relative_to='rear_left_wheel_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>30</mass>
+        <inertia>
+          <ixx>0.91675</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.91675</iyy>
+          <iyz>0</iyz>
+          <izz>1.6335</izz>
+        </inertia>
+      </inertial>
+      <collision name='rear_left_wheel_collision'>
+        <pose>0 0 0 0 1.5708 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.2</length>
+            <radius>0.33</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rear_left_wheel_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.01 0.01 0.01</scale>
+            <uri>model://autopark/urdf/meshes/wheel.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay/>
+    </link>
+    <joint name='rear_right_wheel_joint' type='fixed'>
+      <pose relative_to='map'>-0.8 1.45 0.33 0 -0 0</pose>
+      <parent>map</parent>
+      <child>rear_right_wheel</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+        </ode>
+      </physics>
+    </joint>
+    <link name='rear_right_wheel'>
+      <pose relative_to='rear_right_wheel_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>30</mass>
+        <inertia>
+          <ixx>0.91675</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.91675</iyy>
+          <iyz>0</iyz>
+          <izz>1.6335</izz>
+        </inertia>
+      </inertial>
+      <collision name='rear_right_wheel_collision'>
+        <pose>0 0 0 0 1.5708 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.2</length>
+            <radius>0.33</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rear_right_wheel_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.01 0.01 0.01</scale>
+            <uri>model://autopark/urdf/meshes/wheel.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay/>
+    </link>
+  </model>
+</sdf>
