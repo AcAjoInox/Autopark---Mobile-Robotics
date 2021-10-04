@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="chassis">
+
+  <!-- Base Properties -->
+  <!--prendo le misure della prius hybrid-->
+  <xacro:property name="base_x_size" value="1.357" />  <!--1.7526-->
+  <xacro:property name="base_y_size" value="3" />  <!--2.1-->
+  <xacro:property name="base_z_size" value="0.5" /> <!--0.95--> 
+
+  <xacro:property name="wheelbase" value="1.9" />
+  <xacro:property name="track" value="1.1" />
+  <xacro:property name="mass_chassis" value="800" />
+
+  <xacro:macro name="chassis" params ="modello">
+
+  <xacro:macro name="inertial_cuboid" params="m w d h">
+      <inertia  ixx="${m*( h*h + d*d)/12}" ixy = "0" ixz = "0"
+              iyy="${m*( h*h + w*w)/12}" iyz = "0"
+              izz="${m*( w*w + d*d)/12}" /> 
+  </xacro:macro>
+
+  <!--definizione dei colori-->
+
+  
+  
+    <!-- Base link is the center of the robot's bottom plate -->
+
+    <link name="${modello}_chassis">
+    
+      <!--caratteristiche inerziali-->
+      <inertial>
+        <mass value="${mass_chassis}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <xacro:inertial_cuboid  m="${mass_chassis}"  w="${base_x_size}" d="${base_y_size}"  h="${base_z_size}"/>
+        <!-- <inertia ixx="2581.13354740" ixy="0.0" ixz="0.0" iyy="591.30846112" iyz="0.0" izz="2681.95008628"/> -->
+      </inertial>
+
+
+      <!--caratteristiche visuali-->
+
+      <visual> 
+        <origin xyz="0 0  0.7" rpy="0 0 0"/>
+        <geometry>
+          <box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
+        </geometry>
+      </visual>
+      <visual> 
+        <origin xyz="0 0  ${0.7+base_z_size}" rpy="0 0 0"/>
+        <geometry>
+          <box size="${base_x_size} ${base_y_size/3} ${base_z_size}"/>
+        </geometry>
+      </visual>
+      <!--bombatura laterale-->
+      <visual> 
+        <origin xyz="0 0  0.7" rpy="0 0 0"/>
+        <geometry>
+          <box size="${base_x_size+0.2} ${base_y_size/1.5} ${base_z_size}"/>
+        </geometry>
+      </visual>
+      <visual> 
+        <origin xyz="0 0  0.7" rpy="0 0 0"/>
+        <geometry>
+          <box size="${base_x_size + 0.4} ${base_y_size/2} ${base_z_size}"/>
+        </geometry>
+      </visual>
+      <!--alettone posteriore-->
+      <visual> 
+        <origin xyz="0.5 1.4  ${0.55+base_z_size}" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.1 0.1 0.3"/>
+        </geometry>
+      </visual>
+      <visual> 
+        <origin xyz="-0.5 1.4  ${0.55+base_z_size}" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.1 0.1 0.3"/>
+        </geometry>
+      </visual>
+      <visual> 
+        <origin xyz="0 1.4  ${0.55+base_z_size+0.2}" rpy="0 0 0"/>
+        <geometry>
+          <box size="${base_x_size} 0.2 0.1"/>
+        </geometry>
+      </visual>
+      <!--parabrezza-->
+      <visual> 
+        <origin xyz="0 -${base_y_size/3}  ${0.55+base_z_size}" rpy="0.6 0 0"/>
+        <geometry>
+          <box size="${base_x_size} ${base_x_size} 0.1"/>
+        </geometry>
+      </visual>
+      <!--vetro posteriore-->
+      <visual> 
+        <origin xyz="0 ${base_y_size/4}  ${0.55+base_z_size}" rpy="-0.8 0 0"/>
+        <geometry>
+          <box size="${base_x_size} ${base_x_size/2+0.2} 0.1"/>
+        </geometry>
+      </visual>
+
+
+     
+      <collision>
+        <origin xyz="0 0  0.7" rpy="0 0 0"/>
+        <geometry>
+          <box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin xyz="0 0  ${0.7+base_z_size}" rpy="0 0 0"/>
+        <geometry>
+          <box size="${base_x_size} ${base_y_size/2} ${base_z_size}"/>
+        </geometry>
+      </collision>
+      
+    </link>
+
+    
+
+    <!--inserisci colori-->
+
+    <gazebo reference="${modello}_chassis">
+      <material>Gazebo/Red</material>
+    </gazebo>
+    
+
+  </xacro:macro>
+</robot>

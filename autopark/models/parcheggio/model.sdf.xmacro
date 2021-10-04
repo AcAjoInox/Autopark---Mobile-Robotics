@@ -1,0 +1,116 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <!--creo una lista di proprietà utili-->
+  <xacro_define_property name="striscia_lunga" value="5"/>
+  <xacro_define_property name="striscia_corta" value="2.5"  />
+  <xacro_define_property name="spessore_striscia" value="0.1" />
+  <xacro_define_property name="altezza_striscia" value="0.305" />
+
+
+  <model name='parcheggio'>
+
+
+    <link name='link_1'>
+      <pose> ${-striscia_corta/2 + spessore_striscia/2 } ${-striscia_lunga/2 + spessore_striscia/2} 0 0 -0 0</pose>
+      <gravity>0</gravity>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <enable_wind>0</enable_wind>
+      <visual name='visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>${striscia_corta} ${spessore_striscia} ${altezza_striscia}</size>
+          </box>
+        </geometry>
+        <material>
+          <specular>0.1 0.1 0.1 1</specular>
+          <diffuse>0 0 0 1</diffuse>
+          <lighting>0</lighting>
+          <script>
+            <uri>file://media/materials/scripts/Gazebo.material</uri>
+            <name>Gazebo/White</name>
+          </script>
+          <shader type="pixel">
+            <normal_map>default</normal_map>
+          </shader>
+          <emissive>0 0 0 1</emissive>
+          <ambient>0 0 0 1</ambient>
+        </material>
+        <transparency>0</transparency>
+        <cast_shadows>1</cast_shadows>
+      </visual>
+    </link>
+    <static>0</static>
+    <allow_auto_disable>1</allow_auto_disable>
+
+    <link name='link_2'>
+      <pose>0 0 0 0 -0 0</pose>
+      <gravity>0</gravity>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <enable_wind>0</enable_wind>
+      <visual name='visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>${spessore_striscia} ${striscia_lunga} ${altezza_striscia}</size>
+          </box>
+        </geometry>
+        <material>
+          <specular>0.1 0.1 0.1 1</specular>
+          <diffuse>0 0 0 1</diffuse>
+          <lighting>0</lighting>
+          <script>
+            <uri>file://media/materials/scripts/Gazebo.material</uri>
+            <name>Gazebo/White</name>
+          </script>
+          <shader type="pixel">
+            <normal_map>default</normal_map>
+          </shader>
+          <emissive>0 0 0 1</emissive>
+          <ambient>0 0 0 1</ambient>
+        </material>
+        <transparency>0</transparency>
+        <cast_shadows>1</cast_shadows>
+      </visual>
+    </link>
+    <static>0</static>
+    <allow_auto_disable>1</allow_auto_disable>
+
+    <link name='link_3'>
+      <pose>${-striscia_corta/2 + spessore_striscia/2 } ${striscia_lunga/2 - spessore_striscia/2} 0 0 -0 0</pose>
+      <gravity>0</gravity>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <enable_wind>0</enable_wind>
+      <visual name='visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>${striscia_corta} ${spessore_striscia} ${altezza_striscia}</size>
+          </box>
+        </geometry>
+        <material>
+          <specular>0.1 0.1 0.1 1</specular>
+          <diffuse>0 0 0 1</diffuse>
+          <lighting>0</lighting>
+          <script>
+            <uri>file://media/materials/scripts/Gazebo.material</uri>
+            <name>Gazebo/White</name>
+          </script>
+          <shader type="pixel">
+            <normal_map>default</normal_map>
+          </shader>
+          <emissive>0 0 0 1</emissive>
+          <ambient>0 0 0 1</ambient>
+        </material>
+        <transparency>0</transparency>
+        <cast_shadows>1</cast_shadows>
+      </visual>
+    </link>
+    <static>0</static>
+    <allow_auto_disable>1</allow_auto_disable>
+
+  </model>
+</sdf>

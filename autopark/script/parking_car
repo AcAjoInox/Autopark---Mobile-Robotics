@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+
+import numpy as np
+from cubicpath import ref_trajectory_generation,compute_cubic_trajectory
+from unicycle import unicycle_error_model, R
+from scipy.integrate import odeint
+
+
+lato=52
+vel=5 #m/s
+passo=0.1
+elementi=round(lato/(passo*vel))
+
+tfin1=elementi*passo
+t1=np.linspace(0,tfin1,elementi)
+tfin2=tfin1+elementi*passo
+t2=np.linspace(tfin1,tfin2,elementi)
+tfin3=tfin2+elementi*passo
+t3=np.linspace(tfin2,tfin3,elementi)
+tfin4=tfin3+elementi*passo
+t4=np.linspace(tfin3,tfin4,elementi)
+t=np.concatenate([t1,t2,t3,t4])
+
+(x_s,y_s,dotx_d,doty_d) = ref_trajectory_generation(t,t1,t2,t3,t4,lato,vel,passo,elementi)
+
+#prendi le posizioni dei parcheggi
+str_lun=5
+str_cor=2.5
+park1_x=22.45
+park1_rot=0+1.57 #questi 90° su gazebo si tolgono perchè il sdr è diverso
+park2_x=-22.45
+park2_rot=3.14+1.57
+park3_y=22.45
+park3_rot=1.57+1.57
+park4_y=-22.45
+park4_rot=-1.57+1.57
+spess_str=0.1
+inizio=3.55
+def park_position(inizio,spess_str,str_lun,str_cor,park1_x,park1_rot,park2_x,park2_rot,park3_y,park3_rot,park4_y,park4_rot):
+    #l'ordine dei parcheggi è 7,6,5,1,2,3,4,18,17,16,15,19,20,21,11,10,9,8,12,13,14,28,27,26,22,23,24,25
+    xi_list1=np.repeat(park1_x+inizio,7)
+    yi_list1=[-3*str_lun + 3*spess_str,-2*str_lun + 2*spess_str,-str_lun +spess_str,0,str_lun-spess_str,2*str_lun-2*spess_str,3*str_lun-3*spess_str]
+    rot_list1=np.repeat(park1_rot,7)
+    xf_list1=np.repeat(park1_x,7)
+    yf_list1=[-3*str_lun + 3*spess_str,-2*str_lun + 2*spess_str,-str_lun +spess_str,0,str_lun-spess_str,2*str_lun-2*spess_str,3*str_lun-3*spess_str]
+    
+    xi_list2=[3*str_lun-3*spess_str,2*str_lun-2*spess_str,str_lun-spess_str,0,-str_lun+spess_str,-2*str_lun+2*spess_str,-3*str_lun+3*spess_str]
+    yi_list2=np.repeat(park3_y+inizio,7)
+    rot_list2=np.repeat(park3_rot,7)
+    xf_list2=[3*str_lun-3*spess_str,2*str_lun-2*spess_str,str_lun-spess_str,0,-str_lun+spess_str,-2*str_lun+2*spess_str,-3*str_lun+3*spess_str]
+    yf_list2=np.repeat(park3_y,7)
+    
+    xi_list3=np.repeat(park2_x-inizio,7)
+    yi_list3=[3*str_lun-3*spess_str,2*str_lun-2*spess_str,str_lun-spess_str,0,-str_lun+spess_str,-2*str_lun+2*spess_str,-3*str_lun+3*spess_str]
+    rot_list3=np.repeat(park2_rot,7)
+    xf_list3=np.repeat(park2_x,7)
+    yf_list3=[3*str_lun-3*spess_str,2*str_lun-2*spess_str,str_lun-spess_str,0,-str_lun+spess_str,-2*str_lun+2*spess_str,-3*str_lun+3*spess_str]
+    
+    xi_list4=[-3*str_lun + 3*spess_str,-2*str_lun + 2*spess_str,-str_lun +spess_str,0,str_lun-spess_str,2*str_lun-2*spess_str,3*str_lun-3*spess_str]
+    yi_list4=np.repeat(park4_y-inizio,7)
+    rot_list4=np.repeat(park4_rot,7)
+    xf_list4=[-3*str_lun + 3*spess_str,-2*str_lun + 2*spess_str,-str_lun +spess_str,0,str_lun-spess_str,2*str_lun-2*spess_str,3*str_lun-3*spess_str]
+    yf_list4=np.repeat(park4_y,7)
+    
+    xi_list=np.concatenate([xi_list1,xi_list2,xi_list3,xi_list4])
+    yi_list=np.concatenate([yi_list1,yi_list2,yi_list3,yi_list4])
+    rot_list=np.concatenate([rot_list1,rot_list2,rot_list3,rot_list4])
+    
+    xf_list=np.concatenate([xf_list1,xf_list2,xf_list3,xf_list4])
+    yf_list=np.concatenate([yf_list1,yf_list2,yf_list3,yf_list4])
+    
+    return (xi_list,yi_list,rot_list,xf_list,yf_list)
+
+
+(x,y,rot,xf,yf)=park_position(inizio,spess_str,str_lun,str_cor,park1_x,park1_rot,park2_x,park2_rot,park3_y,park3_rot,park4_y,park4_rot)
+
+#qua bisogna implementare if che misura la manovra di parcheggio e decide se il park=1 o park=0, inoltre tramite un msg pose bisogna individuare la posizione attuale della
+#macchinina e decidere in che riquadro di i si trova al fine di definire la manovra di parcheggio
+
+park=1 #1=empty, 0=full
+i=24 #posizione parcheggio
+if park==1:
+    
+    q_i = np.array([x[i+1],y[i+1], rot[i+1]])  #Initial posture (x_i,y_i,theta_i)
+    q_f = np.array([xf[i],yf[i], rot[i]]) #Final posture   (x_f,y_f,theta_f)
+    k = 3  # Initial/final velocity
+
+    t=np.linspace(0,20,1000) 
+
+    out = compute_cubic_trajectory(q_i, q_f, k, t=t)
+    print(q_i,q_f)
+else:
+    print('NON POSSO PARCHEGGIARE')
+
+x_d = out['x']
+y_d = out['y']
+v_d = out['v']
+w_d = out['w']
+theta_d = out['theta']
+rospy.loginfo('x:'+ str(x_d))
+rospy.loginfo('y:'+ str(y_d))
+rospy.loginfo('v:'+ str(v_d))
+rospy.loginfo('w:'+ str(w_d))
+
+
+
+

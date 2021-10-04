@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+<robot name="steering_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find autopark)/urdf/chassis.xacro" />
+  <xacro:include filename="$(find autopark)/urdf/wheel.xacro" />
+  <xacro:include filename="$(find autopark)/urdf/ferrari.gazebo"/> 
+
+  <xacro:property name="M_PI" value="3.14159" />
+
+  <!-- parametri costruttivi -->
+
+  <xacro:property name="lunghezza_asse_posteriore" value="1.6" />  <!--1.357-->
+  <xacro:property name="raggio_asse_posteriore" value="0.075" />
+  <xacro:property name="wheel_length" value="0.2" />
+  <xacro:property name="posizione_y_asse_posteriore" value="1.45" />
+  <xacro:property name="posizione_z_asse_posteriore" value="0.33" />  
+
+  <xacro:property name="steering_link_y" value="${wheel_length + 0.1}" />
+  <xacro:property name="steering_link_xz" value="0.1" />
+
+  <xacro:property name="mass_steering_link" value="50" />
+  <xacro:property name="str_angle" value="0.6"/>
+  
+  <xacro:property name="r200_cam_rgb_px" value="0.005"/>
+  <xacro:property name="r200_cam_rgb_py" value="0.018"/>
+  <xacro:property name="r200_cam_rgb_pz" value="0.013"/>
+  <xacro:property name="r200_cam_depth_offset" value="0.01"/>
+ 
+
+
+  <xacro:macro name="inertial_cuboid" params="m w d h">
+      <inertia  ixx="${m*( h*h + d*d)/12}" ixy = "0" ixz = "0"
+              iyy="${m*( h*h + w*w)/12}" iyz = "0"
+              izz="${m*( w*w + d*d)/12}" /> 
+  </xacro:macro>
+  
+
+  <!--#####################################-->
+  <!--chassis-->
+  <!--#####################################-->
+
+  <xacro:chassis modello="ferrari"/>
+
+  <!--#####################################-->
+  <!--map link -->
+  <!--#####################################-->
+
+  <link name="map">
+  </link>
+
+  <joint name="map_joint" type="fixed">
+      <parent link="map"/>
+      <child link="ferrari_chassis"/>
+  </joint>
+
+  <!--#####################################-->
+  <!--rear axle -->
+  <!--#####################################-->
+
+  <link name= "rear_axle">
+    <inertial>
+      <mass value="30.0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <xacro:inertial m="30" r="${raggio_asse_posteriore}" h="${lunghezza_asse_posteriore}"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0      1.57079 0"/>
+      <geometry>
+        <cylinder radius="${raggio_asse_posteriore}" length="${lunghezza_asse_posteriore}"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0      1.57079 0"/>
+      <geometry>
+        <cylinder radius="${raggio_asse_posteriore}" length="${lunghezza_asse_posteriore}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!--joint che collega lo chassis all'asse posteriore del veicolo -->
+
+  <joint name="rear_axle_joint" type="fixed">
+      <parent link="ferrari_chassis"/>
+      <child link="rear_axle"/>
+      <origin xyz="0   ${posizione_y_asse_posteriore} ${posizione_z_asse_posteriore}" rpy="0 0 0"/>
+      <axis xyz="1 0 0"/>
+  </joint>
+  
+
+  <!--#####################################-->
+  <!--fixed wheels posteriori-->
+  <!--#####################################-->
+  <!-- right = -1 ...left = 1 -->
+
+  <xacro:wheel wheel_prefix="rear_right" parent_link="rear_axle" left_right="1">
+    <origin xyz="${-lunghezza_asse_posteriore/2 }  0 0" rpy="0 0 0" />
+  </xacro:wheel>
+
+  <xacro:wheel wheel_prefix="rear_left" parent_link="rear_axle" left_right="1">
+    <origin xyz="${lunghezza_asse_posteriore/2}  0 0" rpy="0 0 0" />
+  </xacro:wheel>
+
+  <!-- Transmission rear right wheel -->
+  <transmission name="rear_right_wheel_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rear_right_wheel_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rear_right_wheel_joint_motor">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- Transmission rear left wheel -->
+  <transmission name="rear_left_wheel_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rear_left_wheel_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rear_left_wheel_joint_motor">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!--#####################################-->
+  <!--left link sterzante -->
+  <!--#####################################-->
+
+  <link name="front_left_steering">
+    <inertial>
+      <mass value="${mass_steering_link}"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <xacro:inertial_cuboid m="${mass_steering_link}" w="${steering_link_xz}"  d="${steering_link_y}" h="${steering_link_xz}"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${steering_link_xz} ${steering_link_y} ${steering_link_xz}" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${steering_link_xz} ${steering_link_y} ${steering_link_xz}" />
+      </geometry>
+    </collision>
+    
+  </link>
+
+  <joint name="front_left_steering_joint" type="revolute">
+    <limit lower="${-str_angle}" upper="${str_angle}" effort="10000.0" velocity="1000" />
+    <axis xyz="0 0 1" />
+    <parent link="ferrari_chassis" />
+    <child link="front_left_steering" />
+    <origin xyz="${+lunghezza_asse_posteriore/2-steering_link_xz-wheel_length} ${-posizione_y_asse_posteriore + 0.05}  ${posizione_z_asse_posteriore}" rpy="0 0 0"/>
+    <!-- <origin xyz="${+lunghezza_asse_posteriore/2} ${-posizione_y_asse_posteriore + 0.05}  ${posizione_z_asse_posteriore}" rpy="0 0 0"/> -->
+
+  </joint>
+
+  <!--inserisco la trasmissione-->
+
+  <transmission name="front_left_steering_joint_trasm">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="front_left_steering_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="front_left_steering_joint_motor">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!--#####################################-->
+  <!--right_link sterzante -->
+  <!--#####################################-->
+
+  <link name="front_right_steering">
+    <inertial>
+      <mass value="${mass_steering_link}"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <xacro:inertial_cuboid m="${mass_steering_link}" w="${steering_link_xz}"  d="${steering_link_y}" h="${steering_link_xz}"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${steering_link_xz} ${steering_link_y} ${steering_link_xz}" />
+      </geometry>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${steering_link_xz} ${steering_link_y} ${steering_link_xz}" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="front_right_steering_joint" type="revolute">
+    <limit lower="${-str_angle}" upper="${str_angle}" effort="10000.0" velocity="1000.0" />
+    <axis xyz="0 0 1" />
+    <parent link="ferrari_chassis" />
+    <child link="front_right_steering" />
+    <origin xyz="${-lunghezza_asse_posteriore/2+steering_link_xz+wheel_length} ${-posizione_y_asse_posteriore + 0.05}  ${posizione_z_asse_posteriore}" rpy="0 0 0"/>
+    <!-- <origin xyz="${-lunghezza_asse_posteriore/2} ${-posizione_y_asse_posteriore + 0.05}  ${posizione_z_asse_posteriore}" rpy="0 0 0"/> -->
+  </joint>
+
+  <!--inserisco la trasmissione-->
+
+  <transmission name="front_right_steering_joint_trasm">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="front_right_steering_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="front_right_steering_joint_motor">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+  <!--#####################################-->
+  <!--wheels_sterzanti-->
+  <!--#####################################-->
+  
+  <xacro:wheel wheel_prefix="front_right_steering" parent_link="front_left_steering" left_right="-1">
+    <origin xyz="0.3  0 0" rpy="0 0 0" />
+  </xacro:wheel>
+
+  <xacro:wheel wheel_prefix="front_left_steering" parent_link="front_right_steering" left_right="1">
+    <origin xyz="-0.3  0 0" rpy="0 0 0" />
+  </xacro:wheel>
+
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
+  </gazebo>
+  
+  <!--#####################################-->
+  <!--gazebo reference-->
+  <!--#####################################-->
+ <!-- laser scan -->
+<xacro:property name="hokuyo_size" value="0.05" />
+
+    <link name="hokuyo_link">
+        <visual>
+        <origin xyz="0 0 0" rpy="0 0 3.14" />
+        <geometry>
+            <box size="${hokuyo_size} ${hokuyo_size} ${hokuyo_size}"/>
+        </geometry>
+        </visual>
+    </link>
+
+    <joint name="hokuyo_joint" type="fixed">
+        <origin xyz="${base_x_size/1.4} 0 0.7" rpy="0 0 0"/>
+        <parent link="ferrari_chassis"/>
+        <child link="hokuyo_link" />
+    </joint>
+    
+    <gazebo reference="hokuyo_link">
+        <material>Gazebo/Blue</material>
+        <turnGravityOff>false</turnGravityOff>
+        <sensor type="ray" name="head_hokuyo_sensor">
+        <pose>${hokuyo_size/2} 0 0 0 0 0</pose>
+        <visualize>false</visualize>
+        <update_rate>40</update_rate>
+        <ray>
+            <scan>
+            <horizontal>
+                <samples>720</samples>
+                <resolution>1</resolution>
+                <min_angle>-1.570796</min_angle>
+                <max_angle>1.570796</max_angle>
+            </horizontal>
+            </scan>
+            <range>
+            <min>0.10</min>
+            <max>4.0</max>
+            <resolution>0.001</resolution>
+            </range>
+        </ray>
+        <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+            <topicName>/scan</topicName>
+            <frameName>hokuyo_link</frameName>
+        </plugin>
+        </sensor>
+    </gazebo>
+
+
+  <gazebo>
+
+          <!-- Groundtruth plugin -->
+    <plugin name="robot_groundtruth_sim" filename="libgazebo_ros_p3d.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100.0</updateRate>
+      <bodyName>ferrari_chassis</bodyName>
+      <topicName>odom</topicName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <frameName>map</frameName>
+      <xyzOffsets>0 0 0</xyzOffsets>
+      <rpyOffsets>0 0 0</rpyOffsets>
+    </plugin> 
+  </gazebo>
+  
+
+</robot>

@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+
+  <xacro_define_property name="striscia_lunga" value="5"/>
+  <xacro_define_property name="lato_Q" value="40"/>
+  <xacro_define_property name="striscia_corta" value="2.5"  />
+  <xacro_define_property name="spessore_striscia" value="0.1" />
+
+  <model name='griglia_parcheggio'>
+
+
+    <!--parcheggio centrale-->    
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking1</name>
+      <pose> 0 0 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+
+    <!--tre parcheggi a destra-->
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking2</name>
+      <pose> 0 ${striscia_lunga - spessore_striscia} 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking3</name>
+      <pose> 0 ${2*striscia_lunga - 2*spessore_striscia } 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking4</name>
+      <pose> 0 ${3*striscia_lunga - 3*spessore_striscia} 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+
+    <!--tre parcheggi a sinistra-->
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking5</name>
+      <pose> 0 ${-striscia_lunga + spessore_striscia} 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking6</name>
+      <pose> 0 ${-2*striscia_lunga + 2*spessore_striscia} 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking7</name>
+      <pose> 0 ${-3*striscia_lunga + 3*spessore_striscia} 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+    
+  </model>
+</sdf>

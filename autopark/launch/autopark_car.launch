@@ -1,0 +1,37 @@
+<launch>
+  <arg name="model" default="$(find autopark)/urdf/ferrari.urdf"/>
+  <arg name="node_start_delay" default="20.0" />  
+  <arg name="node1_start_delay" default="6.0" /> 
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find autopark)/world/custom_world.world"/>
+    <!-- more default parameters can be changed here -->
+  </include>
+  
+  <node name="store_model_poses_node" pkg="pose" type="store_model_poses.py" output="screen">
+  </node>
+  <node name="object_spawner_node" pkg="object_spawner" type="object_spawner.py" output="screen" launch-prefix="bash -c 'sleep $(arg node1_start_delay); $0 $@' ">
+  </node>
+ 
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)" /> 
+
+  <!-- <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+      args="-x -26 -y 24 -z 0.3 -Y 0.0 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />   -->
+    <!-- push robot_description to factory and spawn robot in gazebo -->
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' ">
+        <param name="publish_frequency" type="double" value="30.0" />
+  </node>
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner"
+        args="$(find autopark)/config/ferrari_control.yaml"
+        launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' " ns="ferrari"/>
+ 
+  <!-- <node name="controller_spawner" pkg="controller_manager" type="spawner"
+        args="$(find autopark)/config/ferrari_control.yaml"/> -->
+
+  <node name="cmdvel2gazebo" pkg="autopark" type="cmdvel2gazebo.py" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' ">
+    <rosparam file="$(find autopark)/config/ferrari_control.yaml" command="load"/>
+  </node>
+   
+</launch>

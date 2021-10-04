@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wheel">
+
+  <!-- Wheel Properties -->
+
+  <xacro:property name="wheel_length" value="0.2" />
+  <xacro:property name="wheel_radius" value="0.33" />
+  <xacro:property name="mass_wheel" value="30" />
+
+  <xacro:property name="M_PI2" value="1.570796327"  />
+
+  <xacro:macro name="inertial" params="m r h">
+    <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+              iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+              izz="${m*r*r/2}" /> 
+  </xacro:macro>
+
+  <xacro:macro name="wheel" params="wheel_prefix parent_link left_right *joint_origin" > 
+
+
+    <link name="${wheel_prefix}_wheel">
+
+      <inertial>
+        <mass value="${mass_wheel}" />
+        <origin xyz="0 0 0" />
+        <xacro:inertial  m="${mass_wheel}" r="${wheel_radius}" h="${wheel_length}" />
+      </inertial>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://autopark/urdf/meshes/wheel.dae" scale="0.01 0.01 0.01"/>
+          <!-- <cylinder length="${wheel_length}" radius="${wheel_radius}" /> -->
+        </geometry>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 ${M_PI2} 0" />
+        <geometry>
+          <cylinder length="${wheel_length}" radius="${wheel_radius}" />
+        </geometry>
+        <surface>
+                <friction>
+                    <ode>
+                        <mu>10000000</mu>
+                        <mu2>7000</mu2>
+                    </ode>
+                </friction>
+                <bounce>
+                    <restitution_coefficient>0.0</restitution_coefficient>
+                </bounce>
+                <contact>
+                    <ode>
+                        <soft_cfm>0.001</soft_cfm>
+                        <soft_erp>0.5</soft_erp>
+                        <kp>10000000</kp>
+                        <kd>1</kd>
+                    </ode>
+                </contact>
+            </surface>
+      </collision>
+
+    </link>
+
+    <gazebo reference="${wheel_prefix}_wheel">
+      
+      <material>Gazebo/Black</material>
+      <turnGravityOff>False</turnGravityOff>
+    </gazebo>
+    
+    <joint name="${wheel_prefix}_wheel_joint" type="continuous">
+      <parent link="${parent_link}" />
+      <child link="${wheel_prefix}_wheel" />
+      <xacro:insert_block name="joint_origin" />
+      <axis xyz="1 0 0" />
+      <dynamics damping="0.01"/>
+      <limit effort="10000" velocity="1000" />
+      <joint_properties damping="10" friction="10.0" />
+    </joint>
+
+    
+    
+  </xacro:macro>
+  <!--
+  <xacro:wheel  wheel_prefix="monoruota" parent_link="ciao" left_right="-1"/>
+  -->
+</robot>

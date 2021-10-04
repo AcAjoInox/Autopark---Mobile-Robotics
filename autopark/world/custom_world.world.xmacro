@@ -1,0 +1,292 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <xacro_define_property name="striscia_lunga" value="5"/>
+  <xacro_define_property name="lato_Q" value="40"/>
+  <xacro_define_property name="striscia_corta" value="2.5"  />
+  <xacro_define_property name="spessore_striscia" value="0.1" />
+  <!-- per il park1-->
+  <xacro_define_property name="park1_coor_x" value="22.45" />
+  <!-- per il park2-->
+  <xacro_define_property name="park2_coor_x" value="-22.45" />
+  <xacro_define_property name="park2_coor_rot" value="3.14" />
+  <!-- per il park3-->
+  <xacro_define_property name="park3_coor_y" value="22.45" />
+  <xacro_define_property name="park3_coor_rot" value="1.57" />
+  <!-- per il park4-->
+  <xacro_define_property name="park4_coor_y" value="-22.45" />
+  <xacro_define_property name="park4_coor_rot" value="-1.57" />
+
+  <world name="custom_world">
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!--PARK1--> 
+    <!--parcheggio centrale-->    
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking1</name>
+      <pose> ${park1_coor_x} 0 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+
+    <!--tre parcheggi a destra--> 
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking2</name>
+      <pose> ${park1_coor_x} ${striscia_lunga - spessore_striscia} 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>    
+      <name>parking3</name>
+      <pose> ${park1_coor_x} ${2*striscia_lunga - 2*spessore_striscia } 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking4</name>
+      <pose> ${park1_coor_x} ${3*striscia_lunga - 3*spessore_striscia} 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+
+
+    <!--tre parcheggi a sinistra-->
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking5</name>
+      <pose> ${park1_coor_x} ${-striscia_lunga + spessore_striscia} 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking6</name>
+      <pose> ${park1_coor_x} ${-2*striscia_lunga + 2*spessore_striscia} 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking7</name>
+      <pose> ${park1_coor_x} ${-3*striscia_lunga + 3*spessore_striscia} 0 0 0 0 </pose>
+      <static>0</static>
+    </include>
+         
+    <!--PARK2--> 
+    <!--parcheggio centrale-->    
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking8</name>
+      <pose> ${park2_coor_x} 0 0 0 0 ${park2_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <!--tre parcheggi a destra--> 
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking9</name>
+      <pose> ${park2_coor_x} ${striscia_lunga - spessore_striscia} 0 0 0 ${park2_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>    
+      <name>parking10</name>
+      <pose> ${park2_coor_x} ${2*striscia_lunga - 2*spessore_striscia } 0 0 0 ${park2_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking11</name>
+      <pose> ${park2_coor_x} ${3*striscia_lunga - 3*spessore_striscia} 0 0 0 ${park2_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <!--tre parcheggi a sinistra-->
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking12</name>
+      <pose> ${park2_coor_x} ${-striscia_lunga + spessore_striscia} 0 0 0 ${park2_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking13</name>
+      <pose> ${park2_coor_x} ${-2*striscia_lunga + 2*spessore_striscia} 0 0 0 ${park2_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking14</name>
+      <pose> ${park2_coor_x} ${-3*striscia_lunga + 3*spessore_striscia} 0 0 0 ${park2_coor_rot} </pose>
+      <static>0</static>
+    </include>
+
+    <!--PARK3--> 
+    <!--parcheggio centrale-->    
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking15</name>
+      <pose> 0 ${park3_coor_y} 0 0 0 ${park3_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <!--tre parcheggi a destra--> 
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking16</name>
+      <pose> ${striscia_lunga - spessore_striscia} ${park3_coor_y} 0 0 0 ${park3_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>    
+      <name>parking17</name>
+      <pose> ${2*striscia_lunga - 2*spessore_striscia} ${park3_coor_y } 0 0 0 ${park3_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking18</name>
+      <pose> ${3*striscia_lunga - 3*spessore_striscia} ${park3_coor_y} 0 0 0 ${park3_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <!--tre parcheggi a sinistra-->
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking19</name>
+      <pose> ${-striscia_lunga + spessore_striscia} ${park3_coor_y} 0 0 0 ${park3_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking20</name>
+      <pose> ${-2*striscia_lunga + 2*spessore_striscia} ${park3_coor_y} 0 0 0 ${park3_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking21</name>
+      <pose> ${-3*striscia_lunga + 3*spessore_striscia} ${park3_coor_y} 0 0 0 ${park3_coor_rot} </pose>
+      <static>0</static>
+    </include>
+       
+    <!--PARK3--> 
+    <!--parcheggio centrale-->    
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking22</name>
+      <pose> 0 ${park4_coor_y} 0 0 0 ${park4_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <!--tre parcheggi a destra--> 
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking23</name>
+      <pose> ${striscia_lunga - spessore_striscia} ${park4_coor_y} 0 0 0 ${park4_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>    
+      <name>parking24</name>
+      <pose> ${2*striscia_lunga - 2*spessore_striscia} ${park4_coor_y } 0 0 0 ${park4_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking25 </name>
+      <pose> ${3*striscia_lunga - 3*spessore_striscia} ${park4_coor_y} 0 0 0 ${park4_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <!--tre parcheggi a sinistra-->
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking26</name>
+      <pose> ${-striscia_lunga + spessore_striscia} ${park4_coor_y} 0 0 0 ${park4_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking27</name>
+      <pose> ${-2*striscia_lunga + 2*spessore_striscia} ${park4_coor_y} 0 0 0 ${park4_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/parcheggio</uri>
+      <name>parking28</name>
+      <pose> ${-3*striscia_lunga + 3*spessore_striscia} ${park4_coor_y} 0 0 0 ${park4_coor_rot} </pose>
+      <static>0</static>
+    </include>
+    
+    
+
+    <!--asfalto -->
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/asphalt_plane_esteso</uri>
+      <name>asfalto1</name>
+      <pose> 24.5 0 0 0 0 0 </pose>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/asphalt_plane</uri>
+      <name>asfalto2</name>
+      <pose> 0 24.5 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/asphalt_plane</uri>
+      <name>asfalto3</name>
+      <pose> 0 -24.5 0 0 0 1.57</pose>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/asphalt_plane_esteso</uri>
+      <name>asfalto4</name>
+      <pose> -24.5 0 0 0 0 0</pose>
+    </include>
+   
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/pratino</uri>
+      <name>prato</name>
+      <pose> 0 0 0 0 0 0</pose>
+    </include> -->
+   
+    <!--
+    alberi accessori del parchetto e cielo-->
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/oak_tree</uri>
+      <name>albero1</name>
+      <pose> 7 -7 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/oak_tree</uri>
+      <name>albero2</name>
+      <pose> 7 7 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/oak_tree</uri>
+      <name>albero3</name>
+      <pose> -7 -7 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>/home/studenti/catkin_ws/src/autopark/models/oak_tree</uri>
+      <name>albero4</name>
+      <pose> -7 7 0 0 0 0</pose>
+    </include> 
+
+
+    <scene>
+      <sky>
+        <clouds>
+          <speed>1</speed>
+        </clouds>
+      </sky>
+    </scene>  
+   
+    
+  </world>
+</sdf>
