@@ -4,7 +4,7 @@ project in mobile Robotics 20/21
 DESCRIZIONE 
 - i pacchetti pose e object_spawner servono allo spawn randomico in numero e in tipologia di modello dei veicoli nei 28 parcheggi
 - nel pacchetto autopark si trova il file urdf del car-like robot ferrari.urdf
-- il controller utilizzato è il file python cmdvel2gazebo.py che riconduce il car-like robot ad un uniciclo
+- il controller utilizzato è il file python cmdvel2gazebo.py 
 - Nel file dist_obj è implementato il sensing
 - Nel file trajectory_generation viene generata la traiettoria di parcheggio
 - Il file trajectory_tracking è lo script principale 
