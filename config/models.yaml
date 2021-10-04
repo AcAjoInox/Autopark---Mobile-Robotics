@@ -1,9 +1,0 @@
-models:
-  - name: car_lexus
-    type: sdf
-    package: object_spawner
-    pose: [-0, 0, 0.3, 0, 0, 0]
-  - name: car_lexus
-    type: sdf
-    package: object_spawner
-    pose: [6, 6, 0.3, 0, 0, 0]
