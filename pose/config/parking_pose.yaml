@@ -1,0 +1,9 @@
+models:
+  - name: park
+    type: sdf
+    package: pose
+    pose: [22.45, 0.0, 0.0, 0.0, -0.0, 0.0]
+  - name: park
+    type: sdf
+    package: pose
+    pose: [-22.45, 0.0, 0.0, 0.0, -0.0, 3.14]
