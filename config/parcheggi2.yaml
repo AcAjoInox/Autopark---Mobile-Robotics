@@ -1,0 +1,113 @@
+models:
+  - name: parking8
+    type: sdf
+    package: object_spawner
+    pose: [21.0, 0.0, 0.3, 0.0, -0.0, 3.141592653589793]
+  - name: parking9
+    type: sdf
+    package: object_spawner
+    pose: [21.0, 4.9, 0.3, 0.0, -0.0, 3.141592653589793]
+  - name: parking10
+    type: sdf
+    package: object_spawner
+    pose: [21.0, 9.8, 0.3, 0.0, -0.0, 3.141592653589793]
+  - name: parking11
+    type: sdf
+    package: object_spawner
+    pose: [21.0, 14.7, 0.3, 0.0, -0.0, 3.141592653589793]
+  - name: parking12
+    type: sdf
+    package: object_spawner
+    pose: [21.0, -4.9, 0.3, 0.0, -0.0, 3.141592653589793]
+  - name: parking13
+    type: sdf
+    package: object_spawner
+    pose: [21.0, -9.8, 0.3, 0.0, -0.0, 3.141592653589793]
+  - name: parking14
+    type: sdf
+    package: object_spawner
+    pose: [21.0, -14.7, 0.3, 0.0, -0.0, 3.141592653589793]
+  - name: parking1
+    type: sdf
+    package: object_spawner
+    pose: [-21.0, 0.0, 0.3, 0.0, -0.0, 6.281592653589794]
+  - name: parking2
+    type: sdf
+    package: object_spawner
+    pose: [-21.0, 4.9, 0.3, 0.0, -0.0, 6.281592653589794]
+  - name: parking3
+    type: sdf
+    package: object_spawner
+    pose: [-21.0, 9.8, 0.3, 0.0, -0.0, 6.281592653589794]
+  - name: parking4
+    type: sdf
+    package: object_spawner
+    pose: [-21.0, 14.700000000000001, 0.3, 0.0, -0.0, 6.281592653589794]
+  - name: parking5
+    type: sdf
+    package: object_spawner
+    pose: [-21.0, -4.9, 0.3, 0.0, -0.0, 6.281592653589794]
+  - name: parking6
+    type: sdf
+    package: object_spawner
+    pose: [-21.0, -9.8, 0.3, 0.0, -0.0, 6.281592653589794]
+  - name: parking7
+    type: sdf
+    package: object_spawner
+    pose: [-21.0, -14.7, 0.3, 0.0, -0.0, 6.281592653589794]
+  - name: parking22
+    type: sdf
+    package: object_spawner
+    pose: [0.0, 21.0, 0.3, 0.0, -0.0, 4.711592653589793]
+  - name: parking23
+    type: sdf
+    package: object_spawner
+    pose: [4.9, 21.0, 0.3, 0.0, -0.0, 4.711592653589793]
+  - name: parking24
+    type: sdf
+    package: object_spawner
+    pose: [9.8, 21.0, 0.3, 0.0, -0.0, 4.711592653589793]
+  - name: parking25
+    type: sdf
+    package: object_spawner
+    pose: [14.700000000000001, 21.0, 0.3, 0.0, -0.0, 4.711592653589793]
+  - name: parking26
+    type: sdf
+    package: object_spawner
+    pose: [-4.9, 21.0, 0.3, 0.0, -0.0, 4.711592653589793]
+  - name: parking27
+    type: sdf
+    package: object_spawner
+    pose: [-9.8, 21.0, 0.3, 0.0, -0.0, 4.711592653589793]
+  - name: parking28
+    type: sdf
+    package: object_spawner
+    pose: [-14.7, 21.0, 0.3, 0.0, -0.0, 4.711592653589793]
+  - name: parking15
+    type: sdf
+    package: object_spawner
+    pose: [0.0, -21.000000000000004, 0.3, 0.0, 0.0, 1.571592653589793]
+  - name: parking16
+    type: sdf
+    package: object_spawner
+    pose: [4.9, -21.000000000000004, 0.3, 0.0, 0.0, 1.571592653589793]
+  - name: parking17
+    type: sdf
+    package: object_spawner
+    pose: [9.8, -21.000000000000004, 0.3, 0.0, 0.0, 1.571592653589793]
+  - name: parking18
+    type: sdf
+    package: object_spawner
+    pose: [14.7, -21.000000000000004, 0.3, 0.0, 0.0, 1.571592653589793]
+  - name: parking19
+    type: sdf
+    package: object_spawner
+    pose: [-4.9, -21.000000000000004, 0.3, 0.0, 0.0, 1.571592653589793]
+  - name: parking20
+    type: sdf
+    package: object_spawner
+    pose: [-9.8, -21.000000000000004, 0.3, 0.0, 0.0, 1.571592653589793]
+  - name: parking21
+    type: sdf
+    package: object_spawner
+    pose: [-14.7, -21.000000000000004, 0.3, 0.0, 0.0, 1.571592653589793]
